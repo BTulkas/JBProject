@@ -5,11 +5,10 @@ import java.util.ArrayList;
 public class Customer {
 	
 	private int customerId;
-	private String firstName, lastName, email, password;
+	private String firstName, lastName, password, email;
 	private ArrayList<Coupon> coupons;
 	
-	public Customer(int customerId, String firstName, String lastName, String email, String password,
-			ArrayList<Coupon> coupons) {
+	public Customer(int customerId, String firstName, String lastName, String email, String password) {
 		super();
 		this.customerId = customerId;
 		this.firstName = firstName;
@@ -19,7 +18,7 @@ public class Customer {
 		this.coupons = coupons;
 	}
 
-	public Customer(String firstName, String lastName, String email, String password, ArrayList<Coupon> coupons) {
+	public Customer(String firstName, String lastName, String email, String password) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -68,7 +67,7 @@ public class Customer {
 		this.coupons = coupons;
 	}
 
-	public int getCusomerId() {
+	public int getCustomerId() {
 		return customerId;
 	}
 

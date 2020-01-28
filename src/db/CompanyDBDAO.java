@@ -16,9 +16,21 @@ public class CompanyDBDAO implements CompanyDAO {
 
 
 	@Override
-	public boolean isCompanyExists(String email, String password) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isCompanyExists(String email, String password) throws SQLException {
+		Connection con = pool.getConnection();
+
+		try {
+
+			PreparedStatement stmnt = con.prepareStatement("SELECT * FROM companies WHERE email = ? and password = ?");
+			stmnt.setString(1, email);
+			stmnt.setString(2, password);
+			ResultSet rs = stmnt.executeQuery();
+
+			return rs.next();
+
+		}finally {
+			pool.restoreConnection(con);
+		}
 	}
 
 	@Override
@@ -57,8 +69,19 @@ public class CompanyDBDAO implements CompanyDAO {
 	}
 
 	@Override
-	public void deleteCompany(int companyId) {
-		// TODO Auto-generated method stub
+	public void deleteCompany(int companyId) throws SQLException {
+		Connection con = pool.getConnection();
+
+		try {
+			PreparedStatement stmnt = con.prepareStatement("DELETE FROM companies WHERE company_id = ?");
+
+			stmnt.setInt(1, companyId);
+
+			stmnt.execute();
+
+		} finally {
+			pool.restoreConnection(con);
+		}
 
 	}
 
