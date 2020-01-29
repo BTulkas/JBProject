@@ -18,16 +18,16 @@ public class CouponDBDAO implements CouponDAO {
         Connection con = pool.getConnection();
 
         try {
-            PreparedStatement stmnt = con.prepareStatement("INSERT INTO coupons (Company_id, category, title, description, start_date, end_date, amount, price, image)) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement stmnt = con.prepareStatement("INSERT INTO coupons (company_id, category, title, description, start_date, end_date, amount, price, image)) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
             stmnt.setInt(1, coupon.getCompanyId());
-            stmnt.setString(2, String.valueOf(coupon.getCategory()));
+            stmnt.setInt(2, coupon.getCategory().ordinal()+1);
             stmnt.setString(3, coupon.getTitle());
             stmnt.setString(4, coupon.getDescription());
             stmnt.setDate(5, coupon.getStartDate());
             stmnt.setDate(6, coupon.getEndDate());
             stmnt.setInt(7, coupon.getAmount());
-            stmnt.setDouble(7, coupon.getPrice());
-            stmnt.setString(8, coupon.getImage());
+            stmnt.setDouble(8, coupon.getPrice());
+            stmnt.setString(9, coupon.getImage());
 
             stmnt.execute();
 
@@ -89,19 +89,34 @@ public class CouponDBDAO implements CouponDAO {
             PreparedStatement stmnt = con.prepareStatement("SELECT * FROM coupons");
             ResultSet rs = stmnt.executeQuery();
             while(rs.next()) {
-                coupons.add(new Coupon());
+                coupons.add(new Coupon(0, 0, null, null, null, null, null, 0, 0, null));
             }
             return coupons;
 
         }finally {
             pool.restoreConnection(con);
-        }    }
+        }
+        }
 
     @Override
-    public Coupon getOneCoupon(int couponId) {
-        return null;
+    public Coupon getOneCoupon(int couponId) throws SQLException {
+        Connection con = pool.getConnection();
+
+        try {
+
+            PreparedStatement stmnt = con.prepareStatement("SELECT * FROM coupons JOIN categories on coupons.category_id = categories.category_id WHERE coupon_id = "+ couponId);
+            ResultSet rs = stmnt.executeQuery();
+            if(rs.first()) {
+                return new Coupon(couponId, null, null, null, null, null, couponId, couponId, null);
+            }
+
+        }finally {
+            pool.restoreConnection(con);
+        }
+		return null;
     }
 
+    
     @Override
     public void addCouponPurchase(int customerId, int couponId) {
 

@@ -15,7 +15,6 @@ public class Customer {
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		this.coupons = coupons;
 	}
 
 	public Customer(String firstName, String lastName, String email, String password) {
@@ -24,7 +23,6 @@ public class Customer {
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		this.coupons = coupons;
 	}
 
 	public String getFirstName() {
