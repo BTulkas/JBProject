@@ -1,4 +1,4 @@
-package facades.exceptions;
+package facades;
 
 import db.CompanyDBDAO;
 import db.CouponDBDAO;

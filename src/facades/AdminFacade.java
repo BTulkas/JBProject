@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import beans.Company;
 import db.CompanyDBDAO;
-import facades.exceptions.ClientFacade;
 import facades.exceptions.CompanyExistsException;
 
 public class AdminFacade  extends ClientFacade{

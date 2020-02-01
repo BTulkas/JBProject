@@ -7,7 +7,7 @@ import db.CompanyDBDAO;
 import db.ConnectionPool;
 import db.exceptions.CompanyNotFoundException;
 
-public class Test {
+public class TestCompany {
 
 	public static void main(String[] args) {
 
