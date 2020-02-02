@@ -109,6 +109,36 @@ public class CouponDBDAO implements CouponDAO {
         }
         }
 
+
+    @Override
+    public ArrayList<Coupon> getCompanyCoupons(int companyId) throws SQLException {
+        ArrayList<Coupon> coupons = new ArrayList<Coupon>(0);
+        Connection con = pool.getConnection();
+
+        try {
+
+            PreparedStatement stmnt = con.prepareStatement("SELECT * FROM coupons WHERE company_id = " + companyId);
+            ResultSet rs = stmnt.executeQuery();
+            while(rs.next()) {
+                coupons.add(new Coupon(
+                        rs.getInt("coupon_id"),
+                        rs.getInt("company_id"),
+                        CategoryType.values()[rs.getInt("category_id")-1],
+                        rs.getString("title"),
+                        rs.getString("description"),
+                        rs.getDate("start_date"),
+                        rs.getDate("end_date"),
+                        rs.getInt("amount"),
+                        rs.getDouble("price"),
+                        rs.getString("image")));
+            }
+            return coupons;
+
+        }finally {
+            pool.restoreConnection(con);
+        }
+        }
+
     @Override
     public Coupon getOneCoupon(int couponId) throws SQLException {
         Connection con = pool.getConnection();
