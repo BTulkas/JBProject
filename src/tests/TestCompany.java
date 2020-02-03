@@ -2,7 +2,10 @@ package tests;
 
 import java.sql.SQLException;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import beans.Company;
+import config.SpringConfig;
 import db.CompanyDBDAO;
 import db.ConnectionPool;
 import db.exceptions.CompanyNotFoundException;
