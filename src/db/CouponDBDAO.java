@@ -2,6 +2,7 @@ package db;
 
 import beans.CategoryType;
 import beans.Coupon;
+import db.exceptions.CustomerNotFoundException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -184,6 +185,25 @@ public class CouponDBDAO implements CouponDAO {
             pool.restoreConnection(con);
         }
 
+    }
+    
+    
+    @Override
+    public int getBuyerId(int couponId) throws SQLException, CustomerNotFoundException {
+    	Connection con = pool.getConnection();
+    	
+    	try {
+    		PreparedStatement stmnt = con.prepareStatement("SELECT customer_id FROM costumers_vs_coupons WHERE coupon_id = " + couponId);
+    		
+            ResultSet rs = stmnt.executeQuery();
+            
+            if(rs.next()) return rs.getInt("customer_id");
+            else throw new CustomerNotFoundException();
+            
+    	} finally {
+    		pool.restoreConnection(con);
+    	}
+    	
     }
 
     @Override

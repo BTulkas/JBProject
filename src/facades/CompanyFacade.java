@@ -6,7 +6,7 @@ import beans.Coupon;
 import db.CompanyDBDAO;
 import db.CouponDBDAO;
 import db.exceptions.CompanyNotFoundException;
-import db.exceptions.CouponNotFoundException;
+import db.exceptions.CustomerNotFoundException;
 import facades.exceptions.CouponExists;
 import facades.exceptions.IncorrectPasswordException;
 
@@ -128,6 +128,13 @@ public class CompanyFacade extends ClientFacade {
 
         coupDB.updateCoupon(coupon_to_update);
 
+    }
+    
+    public void deleteCoupon(int couponId) throws SQLException, CustomerNotFoundException {
+    	
+    	coupDB.deleteCouponPurchase(coupDB.getBuyerId(couponId), couponId);
+    	
+    	coupDB.deleteCoupon(couponId);
     }
 
 }

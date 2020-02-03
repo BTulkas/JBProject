@@ -70,8 +70,8 @@ public class AdminFacade  extends ClientFacade{
 
 	}
 	
-	public void deleteCompany(int id) throws SQLException {
-		compDB.deleteCompany(id);
+	public void deleteCompany(int companyId) throws SQLException {
+		compDB.deleteCompany(companyId);
 	}
 
 

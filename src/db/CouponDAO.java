@@ -1,6 +1,7 @@
 package db;
 
 import beans.Coupon;
+import db.exceptions.CustomerNotFoundException;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,5 +16,6 @@ public interface CouponDAO {
     Coupon getOneCoupon(int couponId) throws SQLException;
     void addCouponPurchase(int customerId, int couponId) throws SQLException;
     void deleteCouponPurchase(int customerId, int couponId) throws SQLException;
+	int getBuyerId(int couponId) throws SQLException, CustomerNotFoundException;
 
 }
