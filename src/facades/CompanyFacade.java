@@ -16,9 +16,6 @@ import java.util.ArrayList;
 
 public class CompanyFacade extends ClientFacade {
 
-    private CompanyDBDAO compDB = new CompanyDBDAO();
-    private CouponDBDAO coupDB = new CouponDBDAO();
-
 
     @Override
     public boolean login(String email, String password) throws SQLException, CompanyNotFoundException, IncorrectPasswordException {
@@ -35,6 +32,7 @@ public class CompanyFacade extends ClientFacade {
         else return true;
     }
 
+
 // Coupon setter methods.
     public void addCoupon(Coupon coupon) throws SQLException, CouponExists {
        ArrayList<Coupon> coupons = coupDB.getCompanyCoupons(coupon.getCompanyId());
@@ -49,86 +47,12 @@ public class CompanyFacade extends ClientFacade {
     }
 
 
-    public void updateCouponTitle(Coupon coupon, String title) throws SQLException {
+    public void updateCoupon(Coupon coupon) throws SQLException {
 
-        Coupon coupon_to_update = coupon;
-
-        coupon_to_update.setTitle(title);
-
-        coupDB.updateCoupon(coupon_to_update);
+        coupDB.updateCoupon(coupon);
 
     }
 
-
-    public void updateCouponCategory(Coupon coupon, CategoryType category) throws SQLException {
-
-        Coupon coupon_to_update = coupon;
-
-        coupon_to_update.setCategory(category);
-
-        coupDB.updateCoupon(coupon_to_update);
-
-    }
-
-    public void updateCouponDescription(Coupon coupon, String description) throws SQLException {
-
-        Coupon coupon_to_update = coupon;
-
-        coupon_to_update.setDescription(description);
-
-        coupDB.updateCoupon(coupon_to_update);
-
-    }
-
-    public void updateCouponStartDate(Coupon coupon, Date startDate) throws SQLException {
-
-        Coupon coupon_to_update = coupon;
-
-        coupon_to_update.setStartDate(startDate);
-
-        coupDB.updateCoupon(coupon_to_update);
-
-    }
-
-    public void updateCouponEndDate(Coupon coupon, Date endDate) throws SQLException {
-
-        Coupon coupon_to_update = coupon;
-
-        coupon_to_update.setEndDate(endDate);
-
-        coupDB.updateCoupon(coupon_to_update);
-
-    }
-
-    public void updateCouponCategory(Coupon coupon, int amount) throws SQLException {
-
-        Coupon coupon_to_update = coupon;
-
-        coupon_to_update.setAmount(amount);
-
-        coupDB.updateCoupon(coupon_to_update);
-
-    }
-
-    public void updateCouponCategory(Coupon coupon, double price) throws SQLException {
-
-        Coupon coupon_to_update = coupon;
-
-        coupon_to_update.setPrice(price);
-
-        coupDB.updateCoupon(coupon_to_update);
-
-    }
-
-    public void updateCouponCategory(Coupon coupon, String image) throws SQLException {
-
-        Coupon coupon_to_update = coupon;
-
-        coupon_to_update.setImage(image);
-
-        coupDB.updateCoupon(coupon_to_update);
-
-    }
     
     public void deleteCoupon(int couponId) throws SQLException, CustomerNotFoundException {
     	
@@ -136,5 +60,38 @@ public class CompanyFacade extends ClientFacade {
     	
     	coupDB.deleteCoupon(couponId);
     }
+
+
+    // Coupon getter methods
+    public ArrayList<Coupon> getCompanyCoupons(int companyId) throws SQLException {
+
+        return coupDB.getCompanyCoupons(companyId);
+    }
+
+
+    public ArrayList<Coupon> getCompanyCouponsByCategory(int companyId, CategoryType category) throws SQLException {
+        ArrayList<Coupon> coupons = coupDB.getCompanyCoupons(companyId);
+
+        for(Coupon coupon:coupons){
+            if(coupon.getCategory() != category) coupons.remove(coupon);
+        }
+        return coupons;
+    }
+
+
+    public ArrayList<Coupon> getCompanyCouponsByMaxPrice(int companyId, double maxPrice) throws SQLException {
+        ArrayList<Coupon> coupons = coupDB.getCompanyCoupons(companyId);
+
+        for(Coupon coupon:coupons){
+            if(coupon.getPrice() != maxPrice) coupons.remove(coupon);
+        }
+        return coupons;
+    }
+
+
+/*    No idea what this is supposed to return.
+    public ??? GetCompanyDetails(???){
+
+    }*/
 
 }

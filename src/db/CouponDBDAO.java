@@ -44,17 +44,16 @@ public class CouponDBDAO implements CouponDAO {
         Connection con = pool.getConnection();
 
         try {
-            PreparedStatement stmnt = con.prepareStatement("UPDATE coupons SET company_id=?, category_id=?, title=?, description=?, start_date=?, end_date=?, amount=?, price=?, image=? WHERE coupon_id=?)");
-            stmnt.setInt(1, coupon.getCompanyId());
-            stmnt.setInt(2, coupon.getCategory().ordinal()+1);
-            stmnt.setString(3, coupon.getTitle());
-            stmnt.setString(4, coupon.getDescription());
-            stmnt.setDate(5, coupon.getStartDate());
-            stmnt.setDate(6, coupon.getEndDate());
-            stmnt.setInt(7, coupon.getAmount());
-            stmnt.setDouble(8, coupon.getPrice());
-            stmnt.setString(9, coupon.getImage());
-            stmnt.setInt(10, coupon.getCouponId());
+            PreparedStatement stmnt = con.prepareStatement("UPDATE coupons SET category_id=?, title=?, description=?, start_date=?, end_date=?, amount=?, price=?, image=? WHERE coupon_id=?)");
+            stmnt.setInt(1, coupon.getCategory().ordinal()+1);
+            stmnt.setString(2, coupon.getTitle());
+            stmnt.setString(3, coupon.getDescription());
+            stmnt.setDate(4, coupon.getStartDate());
+            stmnt.setDate(5, coupon.getEndDate());
+            stmnt.setInt(6, coupon.getAmount());
+            stmnt.setDouble(7, coupon.getPrice());
+            stmnt.setString(8, coupon.getImage());
+            stmnt.setInt(9, coupon.getCouponId());
 
             stmnt.execute();
 
