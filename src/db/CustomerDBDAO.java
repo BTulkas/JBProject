@@ -15,7 +15,7 @@ public class CustomerDBDAO implements CustomerDAO{
 
 
     @Override
-    public boolean isCustomerExists(String email, String password) throws SQLException {
+    public int isCustomerExists(String email, String password) throws SQLException {
         Connection con = pool.getConnection();
 
         try {
@@ -25,7 +25,8 @@ public class CustomerDBDAO implements CustomerDAO{
             stmnt.setString(2, password);
             ResultSet rs = stmnt.executeQuery();
 
-            return rs.next();
+            if(rs.next()) return rs.getInt("customer_id");
+            else return 0;
 
         }finally {
             pool.restoreConnection(con);

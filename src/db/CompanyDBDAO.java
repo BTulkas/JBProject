@@ -16,7 +16,7 @@ public class CompanyDBDAO implements CompanyDAO {
 
 
 	@Override
-	public boolean isCompanyExists(String email, String password) throws SQLException {
+	public int isCompanyExists(String email, String password) throws SQLException {
 		Connection con = pool.getConnection();
 
 		try {
@@ -26,7 +26,8 @@ public class CompanyDBDAO implements CompanyDAO {
 			stmnt.setString(2, password);
 			ResultSet rs = stmnt.executeQuery();
 
-			return rs.next();
+			if(rs.next()) return rs.getInt("company_id");
+			else return 0;
 
 		}finally {
 			pool.restoreConnection(con);

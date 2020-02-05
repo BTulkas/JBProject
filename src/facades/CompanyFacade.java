@@ -3,39 +3,39 @@ package facades;
 import beans.CategoryType;
 import beans.Company;
 import beans.Coupon;
-import db.CompanyDBDAO;
-import db.CouponDBDAO;
+
 import db.exceptions.CompanyNotFoundException;
 import db.exceptions.CustomerNotFoundException;
 import facades.exceptions.CouponExists;
 import facades.exceptions.IncorrectPasswordException;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CompanyFacade extends ClientFacade {
 
+	private int loggedCompanyId;
 
     @Override
     public boolean login(String email, String password) throws SQLException, CompanyNotFoundException, IncorrectPasswordException {
-        ArrayList<Company> companies = compDB.getAllCompanies();
+        int isExists = compDB.isCompanyExists(email, password);
 
-        for (Company comp : companies) {
-            if (comp.getEmail() == email) {
-                if (comp.getPassword() == password) break;
-                else throw new IncorrectPasswordException();
-            }
-        }
-
-        if(!compDB.isCompanyExists(email, password)) throw new CompanyNotFoundException();
-        else return true;
-    }
+		if (isExists == 0) throw new CompanyNotFoundException();
+		else {
+			Company comp = compDB.getOneCompany(isExists);
+					if (comp.getPassword() == password) {
+						loggedCompanyId = isExists;
+						return true;
+					}
+					else throw new IncorrectPasswordException();
+		}
+	}
+			
 
 
 // Coupon setter methods.
     public void addCoupon(Coupon coupon) throws SQLException, CouponExists {
-       ArrayList<Coupon> coupons = coupDB.getCompanyCoupons(coupon.getCompanyId());
+       ArrayList<Coupon> coupons = coupDB.getCompanyCoupons(loggedCompanyId);
 
        for(Coupon coup:coupons){
            if(coup.getTitle() == coupon.getTitle()){
@@ -63,9 +63,9 @@ public class CompanyFacade extends ClientFacade {
 
 
     // Coupon getter methods
-    public ArrayList<Coupon> getCompanyCoupons(int companyId) throws SQLException {
+    public ArrayList<Coupon> getCompanyCoupons() throws SQLException {
 
-        return coupDB.getCompanyCoupons(companyId);
+        return coupDB.getCompanyCoupons(loggedCompanyId);
     }
 
 
@@ -89,9 +89,10 @@ public class CompanyFacade extends ClientFacade {
     }
 
 
-/*    No idea what this is supposed to return.
-    public ??? GetCompanyDetails(???){
+    public Company GetCompanyDetails() throws SQLException, CompanyNotFoundException{
+    	
+    	return compDB.getOneCompany(loggedCompanyId);
 
-    }*/
+    }
 
 }
