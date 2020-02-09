@@ -1,5 +1,6 @@
 package facades;
 
+import beans.CategoryType;
 import beans.Company;
 import beans.Coupon;
 import beans.Customer;
@@ -34,15 +35,49 @@ public class CustomerFacade extends ClientFacade {
 	}
 
 
-    public void purchaseCoupon(Coupon coupon) throws SQLException {
+    // Coupon getter methods
+	public void purchaseCoupon(Coupon coupon) throws SQLException {
 
-        if(coupon.getAmount()==0) {
-        	
-        } else if(coupon.getEndDate().before(new Date())){
-        	
-        } else {
+        if(coupon.getAmount()!=0 && !coupon.getEndDate().before(new Date())) {
         	coupon.setAmount(coupon.getAmount()-1);
-        	coupDB.addCouponPurchase(loggedCustomerId, coupon.getCouponId());
+			coupDB.addCouponPurchase(loggedCustomerId, coupon.getCouponId());
         }
     }
+
+
+    public ArrayList<Coupon> getCustomerPurchaseHistory() throws SQLException, CustomerNotFoundException {
+    	ArrayList<Coupon> coupons = coupDB.getAllCoupons();
+
+    	for(Coupon coupon:coupons){
+    		if(coupDB.getBuyerId(coupon.getCouponId()) != loggedCustomerId) coupons.remove(coupon);
+		}
+
+		return coupons;
+	}
+
+
+	public ArrayList<Coupon> getCustomerPurchaseHistoryByCategory(CategoryType category) throws CustomerNotFoundException, SQLException {
+    	ArrayList<Coupon> coupons = getCustomerPurchaseHistory();
+
+    	for(Coupon coupon:coupons){
+    		if(coupon.getCategory() != category) coupons.remove(coupon);
+		}
+
+		return coupons;
+	}
+
+	public ArrayList<Coupon> getCustomerPurchaseHistoryByPrice(int maxPrice) throws CustomerNotFoundException, SQLException {
+    	ArrayList<Coupon> coupons = getCustomerPurchaseHistory();
+
+    	for(Coupon coupon:coupons){
+    		if(coupon.getPrice() > maxPrice) coupons.remove(coupon);
+		}
+
+		return coupons;
+	}
+
+	public Customer getLoggedCustomer(int loggedCustomerId) throws CustomerNotFoundException, SQLException {
+    	return customDB.getOneCustomer(loggedCustomerId);
+	}
+
 }

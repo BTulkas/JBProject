@@ -87,7 +87,9 @@ public class AdminFacade  extends ClientFacade{
 	}
 
 
-	public void addCompany(Customer customer) throws SQLException, CustomerExistsException {
+
+	// Customer setter methods.
+	public void addCustomer(Customer customer) throws SQLException, CustomerExistsException {
 
 		ArrayList<Company> companies = compDB.getAllCompanies();
 		for(Company cust : companies) {
@@ -99,7 +101,7 @@ public class AdminFacade  extends ClientFacade{
 		cusDB.addCustomer(customer);
 	}
 
-	// Customer setter methods.
+
 	public void updateCustomerEmail(int customerId, String newEmail) throws CustomerNotFoundException, SQLException {
 
 		Customer cus_to_update = cusDB.getOneCustomer(customerId);

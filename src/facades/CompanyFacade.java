@@ -89,7 +89,7 @@ public class CompanyFacade extends ClientFacade {
     }
 
 
-    public Company GetCompanyDetails() throws SQLException, CompanyNotFoundException{
+    public Company getLoggedCompanyDetails() throws SQLException, CompanyNotFoundException{
     	
     	return compDB.getOneCompany(loggedCompanyId);
 
