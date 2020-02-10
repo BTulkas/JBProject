@@ -49,26 +49,13 @@ public class AdminFacade  extends ClientFacade{
 	}
 
 	// Company setter methods.
-	public void updateCompanyEmail(int companyId, String newEmail) throws CompanyNotFoundException, SQLException {
+	public void updateCompany(Company company) throws CompanyNotFoundException, SQLException {
 
-		Company comp_to_update = compDB.getOneCompany(companyId);
-
-		comp_to_update.setEmail(newEmail);
-
-		compDB.updateCompany(comp_to_update);
+		compDB.updateCompany(company);
 
 	}
 
 
-	public void updateCompanyPassword(int companyId, String newPassword) throws CompanyNotFoundException, SQLException {
-
-		Company comp_to_update = compDB.getOneCompany(companyId);
-
-		comp_to_update.setPassword(newPassword);
-
-		compDB.updateCompany(comp_to_update);
-
-	}
 	
 	public void deleteCompany(int companyId) throws SQLException {
 		compDB.deleteCompany(companyId);

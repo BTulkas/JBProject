@@ -27,9 +27,24 @@ public class testAll {
         try {
             AdminFacade loggedAs = (AdminFacade) loginManager.login("admin@admin.com", "admin", ClientType.Administrator);
 
-            loggedAs.addCompany(new Company(String.format("Company_%s", testNum), "123", String.format("company@%s.com", testNum)));
-
+            //loggedAs.addCompany(new Company(String.format("Company_%s", testNum), "123", String.format("company@%s.com", testNum)));
+            
+			/*
+			 * Company company_to_change = loggedAs.getOneCompany(2);
+			 * 
+			 * company_to_change.setPassword("12345");
+			 * company_to_change.setName("Company2");
+			 * 
+			 * loggedAs.updateCompany(company_to_change);
+			 */
+            
+            //System.out.println(loggedAs.getOneCompany(2));
+            
+            loggedAs.deleteCompany(4);
+            
             System.out.println(Arrays.toString(loggedAs.getAllCompanies().toArray()));
+            
+            
 
         } catch (SQLException e) {
             System.out.println(e);
@@ -39,7 +54,7 @@ public class testAll {
             System.out.println(e);
         } catch (CustomerNotFoundException e) {
             System.out.println(e);
-        } catch (CompanyExistsException e) {
+       // } catch (CompanyExistsException e) {
             System.out.println(e);
         } finally {
             dailyJob.quit();

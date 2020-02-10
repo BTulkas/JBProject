@@ -1,18 +1,13 @@
 package facades;
 
 import beans.CategoryType;
-import beans.Company;
 import beans.Coupon;
 import beans.Customer;
-import db.CouponDBDAO;
-import db.CustomerDBDAO;
-import db.exceptions.CompanyNotFoundException;
 import db.exceptions.CustomerNotFoundException;
 import facades.exceptions.IncorrectPasswordException;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 public class CustomerFacade extends ClientFacade {

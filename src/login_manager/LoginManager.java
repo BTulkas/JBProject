@@ -25,7 +25,7 @@ public class LoginManager {
     }
 
 
-    public static ClientFacade login(String email, String password, ClientType clientType) throws SQLException, IncorrectPasswordException, CompanyNotFoundException, CustomerNotFoundException {
+    public ClientFacade login(String email, String password, ClientType clientType) throws SQLException, IncorrectPasswordException, CompanyNotFoundException, CustomerNotFoundException {
 
         switch(clientType){
             case Administrator:
