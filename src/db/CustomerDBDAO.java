@@ -38,11 +38,11 @@ public class CustomerDBDAO implements CustomerDAO{
         Connection con = pool.getConnection();
 
         try {
-            PreparedStatement stmnt = con.prepareStatement("INSERT INTO customers (first_name, last_name, password, email) VALUES(?, ?, ?, ?)");
+            PreparedStatement stmnt = con.prepareStatement("INSERT INTO customers (first_name, last_name, email, password) VALUES(?, ?, ?, ?)");
             stmnt.setString(1, customer.getFirstName());
             stmnt.setString(2, customer.getLastName());
-            stmnt.setString(3, customer.getPassword());
             stmnt.setString(3, customer.getEmail());
+            stmnt.setString(4, customer.getPassword());
 
             stmnt.execute();
 
@@ -57,12 +57,12 @@ public class CustomerDBDAO implements CustomerDAO{
         Connection con = pool.getConnection();
 
         try {
-            PreparedStatement stmnt = con.prepareStatement("UPDATE customers SET first_name = ?, last_name = ?, password = ?, email = ? where customer_id = ?");
+            PreparedStatement stmnt = con.prepareStatement("UPDATE customers SET first_name = ?, last_name = ?, email = ?, password = ? where customer_id = ?");
             stmnt.setString(1, customer.getFirstName());
-            stmnt.setString(1, customer.getLastName());
-            stmnt.setString(2, customer.getPassword());
-            stmnt.setString(3, customer.getEmail());
-            stmnt.setInt(4, customer.getCustomerId());
+            stmnt.setString(2, customer.getLastName());
+            stmnt.setString(3, customer.getPassword());
+            stmnt.setString(4, customer.getEmail());
+            stmnt.setInt(5, customer.getCustomerId());
 
             stmnt.execute();
 

@@ -44,7 +44,7 @@ public class CouponDBDAO implements CouponDAO {
         Connection con = pool.getConnection();
 
         try {
-            PreparedStatement stmnt = con.prepareStatement("UPDATE coupons SET category_id=?, title=?, description=?, start_date=?, end_date=?, amount=?, price=?, image=? WHERE coupon_id=?)");
+            PreparedStatement stmnt = con.prepareStatement("UPDATE coupons SET category_id=?, title=?, description=?, start_date=?, end_date=?, amount=?, price=?, image=? WHERE coupon_id=?");
             stmnt.setInt(1, coupon.getCategory().ordinal()+1);
             stmnt.setString(2, coupon.getTitle());
             stmnt.setString(3, coupon.getDescription());

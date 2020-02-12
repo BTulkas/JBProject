@@ -89,48 +89,12 @@ public class AdminFacade  extends ClientFacade{
 	}
 
 
-	public void updateCustomerEmail(int customerId, String newEmail) throws CustomerNotFoundException, SQLException {
+	public void updateCustomer(Customer customer) throws CustomerNotFoundException, SQLException {
 
-		Customer cus_to_update = cusDB.getOneCustomer(customerId);
-
-		cus_to_update.setEmail(newEmail);
-
-		cusDB.updateCustomer(cus_to_update);
+		cusDB.updateCustomer(customer);
 
 	}
 
-
-	public void updateCustomerPassword(int customerId, String newPassword) throws CustomerNotFoundException, SQLException {
-
-		Customer customer_to_update = cusDB.getOneCustomer(customerId);
-
-		customer_to_update.setPassword(newPassword);
-
-		cusDB.updateCustomer(customer_to_update);
-
-	}
-
-
-	public void updateCustomerFirstName(int customerId, String newName) throws CustomerNotFoundException, SQLException {
-
-		Customer customer_to_update = cusDB.getOneCustomer(customerId);
-
-		customer_to_update.setFirstName(newName);
-
-		cusDB.updateCustomer(customer_to_update);
-
-	}
-
-
-	public void updateCustomerLastName(int customerId, String newName) throws CustomerNotFoundException, SQLException {
-
-		Customer customer_to_update = cusDB.getOneCustomer(customerId);
-
-		customer_to_update.setLastName(newName);
-
-		cusDB.updateCustomer(customer_to_update);
-
-	}
 
 	public void deleteCustomer(int id) throws SQLException {
 		cusDB.deleteCustomer(id);

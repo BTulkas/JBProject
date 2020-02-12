@@ -5,6 +5,7 @@ import beans.Company;
 import beans.Coupon;
 
 import db.exceptions.CompanyNotFoundException;
+import db.exceptions.CouponNotFoundException;
 import db.exceptions.CustomerNotFoundException;
 import facades.exceptions.CouponExists;
 import facades.exceptions.IncorrectPasswordException;
@@ -23,7 +24,7 @@ public class CompanyFacade extends ClientFacade {
 		if (isExists == 0) throw new CompanyNotFoundException();
 		else {
 			Company comp = compDB.getOneCompany(isExists);
-					if (comp.getPassword() == password) {
+					if (comp.getPassword().contentEquals(password)) {
 						loggedCompanyId = isExists;
 						return true;
 					}
@@ -66,6 +67,17 @@ public class CompanyFacade extends ClientFacade {
     public ArrayList<Coupon> getCompanyCoupons() throws SQLException {
 
         return coupDB.getCompanyCoupons(loggedCompanyId);
+    }
+    
+    
+    public Coupon getOneCoupon(int couponId) throws SQLException, CouponNotFoundException {
+    	ArrayList<Coupon> coupons = coupDB.getCompanyCoupons(loggedCompanyId);
+    	
+    	Coupon coupon = coupDB.getOneCoupon(couponId);
+    	
+    	if(coupons.contains(coupon)) return coupon;
+    	else throw new CouponNotFoundException();
+    	
     }
 
 

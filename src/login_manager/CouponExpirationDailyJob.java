@@ -21,13 +21,13 @@ public class CouponExpirationDailyJob extends Thread {
     @Override
     public void run(){
 
-        while(keepGoing == true){
+        do{
 
             try {
                 ArrayList<Coupon> coupons = coupDB.getAllCoupons();
 
                 for(Coupon coupon:coupons){
-                    if(coupon.getEndDate().after(new Date())){
+                    if(coupon.getEndDate().before(new Date())){
                         coupDB.deleteCoupon(coupon.getCouponId());
                     }
                 }
@@ -41,7 +41,7 @@ public class CouponExpirationDailyJob extends Thread {
                 e.printStackTrace();
             }
 
-        }
+        }while(keepGoing == true);
     }
 
     public void quit(){

@@ -1,6 +1,6 @@
 package db.exceptions;
 
-public class CustomerNotFoundException extends Throwable {
+public class CustomerNotFoundException extends Exception {
 
     private static final long serialVersionUID = 2L;
 

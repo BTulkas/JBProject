@@ -50,6 +50,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `coupons` WRITE;
 /*!40000 ALTER TABLE `coupons` DISABLE KEYS */;
+INSERT INTO `coupons` VALUES (2,'Electro Coupon','Discount on electro-stuff','2019-09-19','2020-02-13',1,10.5,'A Image',1,4),(4,'Electro Boogaloo','Discount on electro-stuff','2019-09-19','2020-02-13',1,10.5,'A Image',1,4),(5,'Electro Boogaloo','Discount on electro-stuff','2019-09-19','2020-02-13',1,10.5,'A Image',1,4);
 /*!40000 ALTER TABLE `coupons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,6 +60,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
+INSERT INTO `customers` VALUES (1,'Nir','Nir','nirnir','nir@nir.nir');
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -71,4 +73,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-10 16:00:14
+-- Dump completed on 2020-02-12 15:55:06
