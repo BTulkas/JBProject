@@ -24,7 +24,7 @@ public class CompanyFacade extends ClientFacade {
 		if (isExists == 0) throw new CompanyNotFoundException();
 		else {
 			Company comp = compDB.getOneCompany(isExists);
-					if (comp.getPassword().contentEquals(password)) {
+					if (comp.getPassword().equals(password)) {
 						loggedCompanyId = isExists;
 						return true;
 					}
@@ -39,12 +39,11 @@ public class CompanyFacade extends ClientFacade {
        ArrayList<Coupon> coupons = coupDB.getCompanyCoupons(loggedCompanyId);
 
        for(Coupon coup:coupons){
-           if(coup.getTitle() == coupon.getTitle()){
+           if(coup.getTitle().equals((coupon.getTitle()))){
                throw new CouponExists();
-           } else{
-            coupDB.addCoupon(coupon);
            }
-        }
+       }
+        coupDB.addCoupon(coupon);
     }
 
 
@@ -56,8 +55,8 @@ public class CompanyFacade extends ClientFacade {
 
     
     public void deleteCoupon(int couponId) throws SQLException, CustomerNotFoundException {
-    	
-    	coupDB.deleteCouponPurchase(coupDB.getBuyerId(couponId), couponId);
+
+    	coupDB.deleteCouponPurchase(couponId);
     	
     	coupDB.deleteCoupon(couponId);
     }
@@ -71,11 +70,9 @@ public class CompanyFacade extends ClientFacade {
     
     
     public Coupon getOneCoupon(int couponId) throws SQLException, CouponNotFoundException {
-    	ArrayList<Coupon> coupons = coupDB.getCompanyCoupons(loggedCompanyId);
-    	
     	Coupon coupon = coupDB.getOneCoupon(couponId);
-    	
-    	if(coupons.contains(coupon)) return coupon;
+
+    	if(coupon.getCompanyId() == loggedCompanyId) return coupon;
     	else throw new CouponNotFoundException();
     	
     }

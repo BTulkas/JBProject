@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `project1` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `project1`;
 -- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
 --
 -- Host: localhost    Database: project1
@@ -38,21 +36,12 @@ INSERT INTO `companies` VALUES (1,'Castro','some@one.com','123456'),(2,'Company2
 UNLOCK TABLES;
 
 --
--- Dumping data for table `costumers_vs_coupons`
---
-
-LOCK TABLES `costumers_vs_coupons` WRITE;
-/*!40000 ALTER TABLE `costumers_vs_coupons` DISABLE KEYS */;
-/*!40000 ALTER TABLE `costumers_vs_coupons` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Dumping data for table `coupons`
 --
 
 LOCK TABLES `coupons` WRITE;
 /*!40000 ALTER TABLE `coupons` DISABLE KEYS */;
-INSERT INTO `coupons` VALUES (2,'Electro Coupon','Discount on electro-stuff','2019-09-19','2020-02-13',1,10.5,'A Image',1,4),(4,'Electro Boogaloo','Discount on electro-stuff','2019-09-19','2020-02-13',1,10.5,'A Image',1,4),(5,'Electro Boogaloo','Discount on electro-stuff','2019-09-19','2020-02-13',1,10.5,'A Image',1,4);
+INSERT INTO `coupons` VALUES (6,'Electro Coupon','Discount on electro-stuff','2019-09-19','2020-04-16',0,10.5,'A Image',1,5),(7,'Coupon Rebooted','Discount on electro-stuff','2019-09-19','2020-12-19',0,10.5,'A Image',1,5),(42,'Electric 4','Discount on electro-stuff','2019-09-19','2020-12-19',1,10.5,'A Image',1,4);
 /*!40000 ALTER TABLE `coupons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,8 +51,18 @@ UNLOCK TABLES;
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (1,'Nir','Nir','nirnir','nir@nir.nir');
+INSERT INTO `customers` VALUES (1,'Nir','Nir','nir@nir.nir','nirnir');
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `customers_vs_coupons`
+--
+
+LOCK TABLES `customers_vs_coupons` WRITE;
+/*!40000 ALTER TABLE `customers_vs_coupons` DISABLE KEYS */;
+INSERT INTO `customers_vs_coupons` VALUES (6,1),(7,1);
+/*!40000 ALTER TABLE `customers_vs_coupons` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -75,4 +74,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-16 11:10:01
+-- Dump completed on 2020-02-18 23:08:34

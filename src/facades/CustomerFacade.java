@@ -21,7 +21,7 @@ public class CustomerFacade extends ClientFacade {
 		if (isExists == 0) throw new CustomerNotFoundException();
 		else {
 			Customer custom = customDB.getOneCustomer(isExists);
-					if (custom.getPassword() == password) {
+					if (custom.getPassword().equals(password)) {
 						loggedCustomerId = isExists;
 						return true;
 					}
@@ -33,21 +33,17 @@ public class CustomerFacade extends ClientFacade {
     // Coupon getter methods
 	public void purchaseCoupon(Coupon coupon) throws SQLException {
 
-        if(coupon.getAmount()!=0 && !coupon.getEndDate().before(new Date())) {
+        if(coupon.getAmount()!=0 && coupon.getEndDate().after(new Date())) {
         	coupon.setAmount(coupon.getAmount()-1);
 			coupDB.addCouponPurchase(loggedCustomerId, coupon.getCouponId());
-        }
+			coupDB.updateCoupon(coupon);
+		}
     }
 
 
-    public ArrayList<Coupon> getCustomerPurchaseHistory() throws SQLException, CustomerNotFoundException {
-    	ArrayList<Coupon> coupons = coupDB.getAllCoupons();
+    public ArrayList<Coupon> getCustomerPurchaseHistory() throws SQLException {
 
-    	for(Coupon coupon:coupons){
-    		if(coupDB.getBuyerId(coupon.getCouponId()) != loggedCustomerId) coupons.remove(coupon);
-		}
-
-		return coupons;
+		return coupDB.getCustomerPurchaseHistory(loggedCustomerId);
 	}
 
 

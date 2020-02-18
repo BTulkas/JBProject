@@ -18,7 +18,7 @@ public class TestCoupon {
 
         try {
             coupDB.addCoupon(new Coupon(1, CategoryType.Electronics, "Electro Coupon", "Discount on electro-stuff", Date.valueOf("2019-09-20"),
-            Date.valueOf("2020-02-14"), 1, 10.5, "A Image"));
+            Date.valueOf("2020-04-17"), 1, 10.5, "A Image"));
 
             System.out.println(coupDB.getAllCoupons());
 

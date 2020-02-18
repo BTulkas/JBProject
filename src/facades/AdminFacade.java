@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import beans.Company;
+import beans.Coupon;
 import beans.Customer;
 import db.CompanyDBDAO;
 import db.CustomerDBDAO;
@@ -20,7 +21,7 @@ public class AdminFacade  extends ClientFacade{
 
 	@Override
 	public boolean login(String email, String password) {
-		if(email == "admin@admin.com" && password == "admin") return true;
+		if(email.equals("admin@admin.com") && password.equals("admin")) return true;
 		else return false;
 	}
 
@@ -31,33 +32,44 @@ public class AdminFacade  extends ClientFacade{
 		return compDB.getAllCompanies();
 	}
 
+
 	public Company getOneCompany(int companyId) throws CompanyNotFoundException, SQLException {
 		return compDB.getOneCompany(companyId);
 	}
 
 
+	// Company setter methods.
 	public void addCompany(Company company) throws SQLException, CompanyExistsException {
-		
+
 		ArrayList<Company> companies = compDB.getAllCompanies();
 		for(Company comp : companies) {
 			if(comp.getName().contentEquals(company.getName()) || comp.getEmail().contentEquals(company.getEmail())){
 				throw new CompanyExistsException();
 			}
 		}
-		
+
 		compDB.addCompany(company);
 	}
 
-	// Company setter methods.
+
 	public void updateCompany(Company company) throws CompanyNotFoundException, SQLException {
 
 		compDB.updateCompany(company);
 
 	}
 
-
 	
-	public void deleteCompany(int companyId) throws SQLException {
+	public void deleteCompany(int companyId) throws SQLException, CustomerNotFoundException {
+
+		// Get and delete all company coupons and purchases
+		ArrayList<Coupon> coupons = coupDB.getCompanyCoupons(companyId);
+		for(Coupon coupon:coupons){
+			int coupID = coupon.getCouponId();
+			coupDB.deleteCouponPurchase(coupID);
+			coupDB.deleteCoupon(coupID);
+		}
+
+		// Delete company
 		compDB.deleteCompany(companyId);
 	}
 
@@ -89,15 +101,17 @@ public class AdminFacade  extends ClientFacade{
 	}
 
 
-	public void updateCustomer(Customer customer) throws CustomerNotFoundException, SQLException {
+	public void updateCustomer(Customer customer) throws SQLException {
 
 		cusDB.updateCustomer(customer);
 
 	}
 
 
-	public void deleteCustomer(int id) throws SQLException {
-		cusDB.deleteCustomer(id);
+	public void deleteCustomer(int customerId) throws SQLException {
+		coupDB.deleteCouponPurchaseByCustomer(customerId);
+
+		cusDB.deleteCustomer(customerId);
 	}
 
 }

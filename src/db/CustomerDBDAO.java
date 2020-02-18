@@ -57,7 +57,7 @@ public class CustomerDBDAO implements CustomerDAO{
         Connection con = pool.getConnection();
 
         try {
-            PreparedStatement stmnt = con.prepareStatement("UPDATE customers SET first_name = ?, last_name = ?, email = ?, password = ? where customer_id = ?");
+            PreparedStatement stmnt = con.prepareStatement("UPDATE customers SET first_name = ?, last_name = ?, password = ?, email = ? where customer_id = ?");
             stmnt.setString(1, customer.getFirstName());
             stmnt.setString(2, customer.getLastName());
             stmnt.setString(3, customer.getPassword());
@@ -99,7 +99,7 @@ public class CustomerDBDAO implements CustomerDAO{
             PreparedStatement stmnt = con.prepareStatement("SELECT * FROM customers");
             ResultSet rs = stmnt.executeQuery();
             while(rs.next()) {
-                customers.add(new Customer(rs.getInt("customer_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("password"), rs.getString("email")));
+                customers.add(new Customer(rs.getInt("customer_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email"), rs.getString("password")));
             }
             return customers;
 
@@ -117,7 +117,7 @@ public class CustomerDBDAO implements CustomerDAO{
             PreparedStatement stmnt = con.prepareStatement("SELECT * FROM customers WHERE customer_id = ?");
             stmnt.setInt(1, customerId);
             ResultSet rs = stmnt.executeQuery();
-            if(rs.next()) return new Customer(rs.getInt("customer_id"), rs.getString("first_name"),  rs.getString("last_name"),rs.getString("password"), rs.getString("email"));
+            if(rs.next()) return new Customer(rs.getInt("customer_id"), rs.getString("first_name"),  rs.getString("last_name"), rs.getString("email"), rs.getString("password"));
             else throw new CustomerNotFoundException();
 
         }finally {
