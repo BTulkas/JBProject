@@ -41,7 +41,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `coupons` WRITE;
 /*!40000 ALTER TABLE `coupons` DISABLE KEYS */;
-INSERT INTO `coupons` VALUES (6,'Electro Coupon','Discount on electro-stuff','2019-09-19','2020-04-16',0,10.5,'A Image',1,5),(7,'Coupon Rebooted','Discount on electro-stuff','2019-09-19','2020-12-19',0,10.5,'A Image',1,5),(42,'Electric 4','Discount on electro-stuff','2019-09-19','2020-12-19',1,10.5,'A Image',1,4);
+INSERT INTO `coupons` VALUES (7,'Coupon Rebooted','Discount on electro-stuff','2019-09-19','2020-12-19',0,10.5,'A Image',1,5),(42,'Electric 4','Discount on electro-stuff','2019-09-19','2020-12-19',1,10.5,'A Image',1,4);
 /*!40000 ALTER TABLE `coupons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +61,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `customers_vs_coupons` WRITE;
 /*!40000 ALTER TABLE `customers_vs_coupons` DISABLE KEYS */;
-INSERT INTO `customers_vs_coupons` VALUES (6,1),(7,1);
+INSERT INTO `customers_vs_coupons` VALUES (7,1);
 /*!40000 ALTER TABLE `customers_vs_coupons` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -74,4 +74,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-18 23:08:34
+-- Dump completed on 2020-02-23 16:16:55

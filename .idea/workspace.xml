@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dc67adbb-148b-4e8a-9380-cdd2cae78c84" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/facades/CustomerFacade.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/facades/CustomerFacade.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/tests/testAll.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/tests/testAll.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db/CompanyDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/CompanyDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db/CompanyDBDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/CompanyDBDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db/CouponDBDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/CouponDBDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db/CustomerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/CustomerDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db/CustomerDBDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/CustomerDBDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/facades/AdminFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/facades/AdminFacade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/facades/CompanyFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/facades/CompanyFacade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/facades/CustomerFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/facades/CustomerFacade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/login_manager/LoginManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/login_manager/LoginManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/TestAll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestAll.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/login_manager/CouponExpirationDailyJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/login_manager/CouponExpirationDailyJob.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,7 +15,7 @@
     <session id="-263667441">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="11" />
+          <entry key="project.closed" value="12" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.2" value="1" />
@@ -53,12 +41,12 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="11" />
-          <entry key="java" value="15595" />
+          <entry key="java" value="15853" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="15595" />
+          <entry key="JAVA" value="15853" />
           <entry key="PLAIN_TEXT" value="11" />
         </counts>
       </usages-collector>
@@ -93,8 +81,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/login_manager/CouponExpirationDailyJob.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="534">
-                  <caret line="38" selection-start-line="38" selection-end-line="38" />
+                <state relative-caret-position="738">
+                  <caret line="48" column="58" selection-start-line="48" selection-start-column="58" selection-end-line="48" selection-end-column="58" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -154,11 +142,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/db/CouponDBDAO.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="291">
-                  <caret line="207" column="29" selection-start-line="207" selection-start-column="29" selection-end-line="207" selection-end-column="29" />
+                <state relative-caret-position="-2616">
+                  <caret line="73" column="16" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
                 </state>
               </provider>
             </entry>
@@ -181,11 +169,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/login_manager/LoginManager.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="204">
-                  <caret line="12" column="77" selection-start-line="12" selection-start-column="77" selection-end-line="12" selection-end-column="77" />
+                <state relative-caret-position="510">
+                  <caret line="32" column="24" lean-forward="true" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -250,7 +238,6 @@
         <option value="$PROJECT_DIR$/src/login_manager/ClientType.java" />
         <option value="$PROJECT_DIR$/src/login_manager/CouponExpiratioNDailyJob.java" />
         <option value="$PROJECT_DIR$/src/tests/testAll.java" />
-        <option value="$PROJECT_DIR$/src/login_manager/CouponExpirationDailyJob.java" />
         <option value="$PROJECT_DIR$/src/tests/TestCoupon.java" />
         <option value="$PROJECT_DIR$/src/db/CouponDAO.java" />
         <option value="$PROJECT_DIR$/src/tests/TestAll.java" />
@@ -263,6 +250,7 @@
         <option value="$PROJECT_DIR$/src/facades/CompanyFacade.java" />
         <option value="$PROJECT_DIR$/src/facades/CustomerFacade.java" />
         <option value="$PROJECT_DIR$/src/login_manager/LoginManager.java" />
+        <option value="$PROJECT_DIR$/src/login_manager/CouponExpirationDailyJob.java" />
       </list>
     </option>
   </component>
@@ -422,7 +410,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.10074627" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -670,27 +657,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/CouponDBDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="207" column="29" selection-start-line="207" selection-start-column="29" selection-end-line="207" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/facades/CompanyFacade.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
           <caret line="115" column="48" selection-start-line="115" selection-end-line="116" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/login_manager/CouponExpirationDailyJob.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -703,8 +673,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/login_manager/LoginManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="77" selection-start-line="12" selection-start-column="77" selection-end-line="12" selection-end-column="77" />
+        <state relative-caret-position="510">
+          <caret line="32" column="24" lean-forward="true" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db/CouponDBDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2616">
+          <caret line="73" column="16" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/login_manager/CouponExpirationDailyJob.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="738">
+          <caret line="48" column="58" selection-start-line="48" selection-start-column="58" selection-end-line="48" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

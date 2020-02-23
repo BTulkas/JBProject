@@ -18,16 +18,17 @@ public class CouponExpirationDailyJob extends Thread {
     }
 
 
+    // Iterates over all coupons and deletes all expired coupons and their purchases.
     @Override
     public void run(){
 
         do{
 
             try {
-                ArrayList<Coupon> coupons = coupDB.getAllCoupons();
 
-                for(Coupon coupon:coupons){
+                for(Coupon coupon:coupDB.getAllCoupons()){
                     if(coupon.getEndDate().before(new Date())){
+                        coupDB.deleteCouponPurchase(coupon.getCouponId());
                         coupDB.deleteCoupon(coupon.getCouponId());
                     }
                 }
@@ -38,12 +39,14 @@ public class CouponExpirationDailyJob extends Thread {
             try {
                Thread.sleep(86400000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
 
         }while(keepGoing == true);
     }
 
+
+    // Method to stop the thread when closing the program.
     public void quit(){
         setKeepGoing(false);
         this.interrupt();
