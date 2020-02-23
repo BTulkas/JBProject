@@ -1,6 +1,5 @@
 package login_manager;
 
-import beans.Customer;
 import db.exceptions.CompanyNotFoundException;
 import db.exceptions.CustomerNotFoundException;
 import facades.AdminFacade;
@@ -11,6 +10,7 @@ import facades.exceptions.IncorrectPasswordException;
 
 import java.sql.SQLException;
 
+// Singleton login manager that returns the correct facade to use with login.
 public class LoginManager {
 
     private static LoginManager instance = new LoginManager();

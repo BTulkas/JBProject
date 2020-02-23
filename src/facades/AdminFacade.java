@@ -19,6 +19,7 @@ public class AdminFacade  extends ClientFacade{
 	private CustomerDBDAO cusDB = new CustomerDBDAO();
 
 
+	// Does what it says on the tin.
 	@Override
 	public boolean login(String email, String password) {
 		if(email.equals("admin@admin.com") && password.equals("admin")) return true;
@@ -28,21 +29,27 @@ public class AdminFacade  extends ClientFacade{
 
 	// All company methods.
 	// Company getter methods
+
+	// Returns an ArrayList of all companies.
 	public ArrayList<Company> getAllCompanies() throws SQLException {
 		return compDB.getAllCompanies();
 	}
 
 
+	// Returns one Company object by ID.
 	public Company getOneCompany(int companyId) throws CompanyNotFoundException, SQLException {
 		return compDB.getOneCompany(companyId);
 	}
 
 
 	// Company setter methods.
+
+
+	// Adds a company.
 	public void addCompany(Company company) throws SQLException, CompanyExistsException {
 
-		ArrayList<Company> companies = compDB.getAllCompanies();
-		for(Company comp : companies) {
+		// Iterates over all companies to throw exception if trying to add a company with existing email or name.
+		for(Company comp : compDB.getAllCompanies()) {
 			if(comp.getName().contentEquals(company.getName()) || comp.getEmail().contentEquals(company.getEmail())){
 				throw new CompanyExistsException();
 			}
@@ -52,18 +59,19 @@ public class AdminFacade  extends ClientFacade{
 	}
 
 
+	// Updates company to match Company object given.
 	public void updateCompany(Company company) throws CompanyNotFoundException, SQLException {
 
 		compDB.updateCompany(company);
 
 	}
 
-	
+
+	// Does what it says on the tin.
 	public void deleteCompany(int companyId) throws SQLException, CustomerNotFoundException {
 
-		// Get and delete all company coupons and purchases
-		ArrayList<Coupon> coupons = coupDB.getCompanyCoupons(companyId);
-		for(Coupon coupon:coupons){
+		// Gets and deletes all company coupons and purchases
+		for(Coupon coupon:coupDB.getCompanyCoupons(companyId)){
 			int coupID = coupon.getCouponId();
 			coupDB.deleteCouponPurchase(coupID);
 			coupDB.deleteCoupon(coupID);
@@ -77,10 +85,15 @@ public class AdminFacade  extends ClientFacade{
 
 	// All customer methods.
 	// Customer getter methods
+
+
+	// Returns ArrayList of all customers.
 	public ArrayList<Customer> getAllCustomers() throws SQLException {
 		return cusDB.getAllCustomers();
 	}
 
+
+	// Returns one Customer object by ID.
 	public Customer getOneCustomer(int customerId) throws CustomerNotFoundException, SQLException {
 		return cusDB.getOneCustomer(customerId);
 	}
@@ -88,10 +101,13 @@ public class AdminFacade  extends ClientFacade{
 
 
 	// Customer setter methods.
+
+
+	// Adds a customer.
 	public void addCustomer(Customer customer) throws SQLException, CustomerExistsException {
 
-		ArrayList<Company> companies = compDB.getAllCompanies();
-		for(Company cust : companies) {
+		// Iterates over all Customers to throw exception if tying to add customer with existing email
+		for(Customer cust : cusDB.getAllCustomers()) {
 			if(cust.getEmail().contentEquals(customer.getEmail())){
 				throw new CustomerExistsException();
 			}
@@ -101,6 +117,7 @@ public class AdminFacade  extends ClientFacade{
 	}
 
 
+	// Updates customer to match Customer object given.
 	public void updateCustomer(Customer customer) throws SQLException {
 
 		cusDB.updateCustomer(customer);
@@ -108,7 +125,9 @@ public class AdminFacade  extends ClientFacade{
 	}
 
 
+	// Does what it says on the tin.
 	public void deleteCustomer(int customerId) throws SQLException {
+		// Deletes all customer purchases for some reason before deleting customer
 		coupDB.deleteCouponPurchaseByCustomer(customerId);
 
 		cusDB.deleteCustomer(customerId);

@@ -35,7 +35,12 @@ public class TestAll {
 
         try {
             AdminFacade loggedAs = (AdminFacade) loginManager.login("admin@admin.com", "admin", ClientType.Administrator);
+
+////////////////////////////////////////////////////////////////////////////////////////////////
             // Admin-Company methods
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
             //loggedAs.addCompany(new Company(String.format("Company_%s", testNum), "123", String.format("company@%s.com", testNum)));
             
 			/*
@@ -52,10 +57,12 @@ public class TestAll {
             //loggedAs.deleteCompany(4);
             
              //System.out.println(Arrays.toString(loggedAs.getAllCompanies().toArray()));
-            
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////
 			// Admin-Customer methods
+////////////////////////////////////////////////////////////////////////////////////////////////
+
             
             //loggedAs.addCustomer(new Customer("Not Nir", "Nir", "nir123", "nir@nir.nir"));
             
@@ -74,40 +81,48 @@ public class TestAll {
 
 
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////
             //CompanyFacade tests
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
             CompanyFacade loggedAsComp = (CompanyFacade) loginManager.login("some@one.com", "123456", ClientType.Company);
             
 /*			loggedAsComp.addCoupon(new Coupon(1, CategoryType.Electronics,
 			"Electric 4", "Discount on electro-stuff", Date.valueOf("2019-09-20"),
 			Date.valueOf("2020-12-20"), 1, 10.5, "A Image"));*/
 
-/*          CouponDBDAO coupDB = new CouponDBDAO();
-            Coupon coup = coupDB.getOneCoupon(3);
+/*            CouponDBDAO coupDB = new CouponDBDAO();
+            Coupon coup = coupDB.getOneCoupon(6);
             
-            coup.setEndDate(Date.valueOf("2019-09-20"));
-            
+            coup.setPrice(9);
+
+            coup.setCategory(CategoryType.valueOf("Spa"));
+
             loggedAsComp.updateCoupon(coup);*/
 
-            for(int i=8; i<42; i++){
-                loggedAsComp.deleteCoupon(i);
-            }
+
+            //loggedAsComp.deleteCoupon(6);
 
 
 
             //System.out.println(loggedAsComp.getCompanyCoupons());
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////
+            // Customer Facade test
+////////////////////////////////////////////////////////////////////////////////////////////////
 
-            // Customer Facade tests
-			CustomerFacade loggedAsCust = (CustomerFacade) loginManager.login("nir@nir.nir", "nirnir", ClientType.Customer);
+
+            CustomerFacade loggedAsCust = (CustomerFacade) loginManager.login("nir@nir.nir", "nirnir", ClientType.Customer);
 
 			//loggedAsCust.purchaseCoupon(loggedAsComp.getOneCoupon(7));
 
 
-            //System.out.println(loggedAsCust.getCustomerPurchaseHistory());
+            System.out.println(loggedAsCust.getCustomerPurchaseHistory());
 
-
+            System.out.println(loggedAsCust.getCustomerPurchaseHistoryByCategory(CategoryType.valueOf("Spa")));
+            System.out.println(loggedAsCust.getCustomerPurchaseHistoryByPrice(10));
 
 
 

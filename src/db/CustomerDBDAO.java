@@ -14,15 +14,15 @@ public class CustomerDBDAO implements CustomerDAO{
     private ConnectionPool pool = ConnectionPool.getInstance();
 
 
+    // Returns the ID of a customer with matching email or 0 if none match.
     @Override
-    public int isCustomerExists(String email, String password) throws SQLException {
+    public int isCustomerExists(String email) throws SQLException {
         Connection con = pool.getConnection();
 
         try {
 
-            PreparedStatement stmnt = con.prepareStatement("SELECT * FROM customers WHERE email = ? and password = ?");
+            PreparedStatement stmnt = con.prepareStatement("SELECT * FROM customers WHERE email = ?");
             stmnt.setString(1, email);
-            stmnt.setString(2, password);
             ResultSet rs = stmnt.executeQuery();
 
             if(rs.next()) return rs.getInt("customer_id");
@@ -33,6 +33,7 @@ public class CustomerDBDAO implements CustomerDAO{
         }
     }
 
+    // Saves Customer object to DB, must be created without ID.
     @Override
     public void addCustomer(Customer customer) throws SQLException {
         Connection con = pool.getConnection();
@@ -52,6 +53,8 @@ public class CustomerDBDAO implements CustomerDAO{
 
     }
 
+
+    // Updates DB to match Customer object created with ID through getOneCustomer method.
     @Override
     public void updateCustomer(Customer customer) throws SQLException {
         Connection con = pool.getConnection();
@@ -72,6 +75,8 @@ public class CustomerDBDAO implements CustomerDAO{
 
     }
 
+
+    // Removes a customer from the DB by ID
     @Override
     public void deleteCustomer(int customerId) throws SQLException {
         Connection con = pool.getConnection();
@@ -89,17 +94,26 @@ public class CustomerDBDAO implements CustomerDAO{
 
     }
 
+
+    // Gets an ArrayList of Customers from all customers in the DB
     @Override
     public ArrayList<Customer> getAllCustomers() throws SQLException {
+        // Generates an empty list.
         ArrayList<Customer> customers = new ArrayList<Customer>(0);
         Connection con = pool.getConnection();
 
         try {
-
+            // Gets all of the customers in the DB
             PreparedStatement stmnt = con.prepareStatement("SELECT * FROM customers");
             ResultSet rs = stmnt.executeQuery();
+            // Creates a java object from each row of data and adds it the list.
             while(rs.next()) {
-                customers.add(new Customer(rs.getInt("customer_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email"), rs.getString("password")));
+                customers.add(new Customer(
+                        rs.getInt("customer_id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email"),
+                        rs.getString("password")));
             }
             return customers;
 
@@ -108,6 +122,8 @@ public class CustomerDBDAO implements CustomerDAO{
         }
     }
 
+
+    // Returns a Customer matching a DB row in customers by ID
     @Override
     public Customer getOneCustomer(int customerId) throws CustomerNotFoundException, SQLException {
         Connection con = pool.getConnection();
@@ -117,7 +133,12 @@ public class CustomerDBDAO implements CustomerDAO{
             PreparedStatement stmnt = con.prepareStatement("SELECT * FROM customers WHERE customer_id = ?");
             stmnt.setInt(1, customerId);
             ResultSet rs = stmnt.executeQuery();
-            if(rs.next()) return new Customer(rs.getInt("customer_id"), rs.getString("first_name"),  rs.getString("last_name"), rs.getString("email"), rs.getString("password"));
+            if(rs.next()) return new Customer(rs.getInt(
+                    "customer_id"),
+                    rs.getString("first_name"),
+                    rs.getString("last_name"),
+                    rs.getString("email"),
+                    rs.getString("password"));
             else throw new CustomerNotFoundException();
 
         }finally {

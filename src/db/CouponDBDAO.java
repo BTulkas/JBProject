@@ -16,6 +16,8 @@ public class CouponDBDAO implements CouponDAO {
     private ConnectionPool pool = ConnectionPool.getInstance();
 
 
+
+    // Saves Coupon object to DB, must be created without ID.
     @Override
     public void addCoupon(Coupon coupon) throws SQLException {
         Connection con = pool.getConnection();
@@ -40,6 +42,8 @@ public class CouponDBDAO implements CouponDAO {
 
     }
 
+
+    // Updates DB to match Coupon object created with ID through getOneCoupon method.
     @Override
     public void updateCoupon(Coupon coupon) throws SQLException {
         Connection con = pool.getConnection();
@@ -64,6 +68,8 @@ public class CouponDBDAO implements CouponDAO {
 
     }
 
+
+    // Removes a coupon from the DB by ID.
     @Override
     public void deleteCoupon(int couponId) throws SQLException {
         Connection con = pool.getConnection();
@@ -81,15 +87,19 @@ public class CouponDBDAO implements CouponDAO {
 
     }
 
+
+    // Gets an ArrayList of Coupons created from all coupons in the DB
     @Override
     public ArrayList<Coupon> getAllCoupons() throws SQLException {
+        // Generates an empty list.
         ArrayList<Coupon> coupons = new ArrayList<Coupon>(0);
         Connection con = pool.getConnection();
 
         try {
-
+            // Gets all of the coupons in the DB
             PreparedStatement stmnt = con.prepareStatement("SELECT * FROM coupons");
             ResultSet rs = stmnt.executeQuery();
+            // Creates a java object from each row of data and adds it the list.
             while(rs.next()) {
                 coupons.add(new Coupon(
                         rs.getInt("coupon_id"),
@@ -111,15 +121,18 @@ public class CouponDBDAO implements CouponDAO {
         }
 
 
+    // Gets an ArrayList of Coupons created from all coupons belonging to a single company.
     @Override
     public ArrayList<Coupon> getCompanyCoupons(int companyId) throws SQLException {
+        // Generates an empty list.
         ArrayList<Coupon> coupons = new ArrayList<Coupon>(0);
         Connection con = pool.getConnection();
 
         try {
-
+            // Gets all of the coupons in the DB filtered by company ID
             PreparedStatement stmnt = con.prepareStatement("SELECT * FROM coupons WHERE company_id = " + companyId);
             ResultSet rs = stmnt.executeQuery();
+            // Creates a java object from each row of data and adds it the list.
             while(rs.next()) {
                 coupons.add(new Coupon(
                         rs.getInt("coupon_id"),
@@ -140,6 +153,8 @@ public class CouponDBDAO implements CouponDAO {
         }
         }
 
+
+    // Returns a Coupon matching a DB row in coupons found by ID
     @Override
     public Coupon getOneCoupon(int couponId) throws SQLException, CouponNotFoundException {
         Connection con = pool.getConnection();
@@ -168,7 +183,8 @@ public class CouponDBDAO implements CouponDAO {
         }
     }
 
-    
+
+    // Saves new row into the coupons_vs_customers table in DB
     @Override
     public void addCouponPurchase(int customerId, int couponId) throws SQLException {
         Connection con = pool.getConnection();
@@ -187,17 +203,20 @@ public class CouponDBDAO implements CouponDAO {
     }
 
 
+    // Returns ArrayList of Coupons purchased by specific customer
     @Override
     public ArrayList<Coupon> getCustomerPurchaseHistory(int customerId) throws SQLException {
+        // Generates an empty list.
         ArrayList<Coupon> coupons = new ArrayList<Coupon>(0);
         Connection con = pool.getConnection();
 
         try {
-
+            // Gets all of the coupons filtered by customer ID in customers_vs_coupons
             PreparedStatement stmnt = con.prepareStatement(
                     "SELECT * FROM coupons JOIN customers_vs_coupons ON coupons.coupon_id = customers_vs_coupons.coupon_id " +
                             "WHERE customers_vs_coupons.customer_id = " + customerId);
             ResultSet rs = stmnt.executeQuery();
+            // Creates a java object from each row of data and adds it the list.
             while(rs.next()) {
                 coupons.add(new Coupon(
                         rs.getInt("coupon_id"),
@@ -219,7 +238,7 @@ public class CouponDBDAO implements CouponDAO {
     }
 
 
-    // Used when deleting a single coupon or a whole company.
+    // Used to delete purchases when deleting a single coupon or a whole company.
     @Override
     public void deleteCouponPurchase(int couponId) throws SQLException {
         Connection con = pool.getConnection();
@@ -237,7 +256,7 @@ public class CouponDBDAO implements CouponDAO {
     }
 
 
-    // Used when deleting a customer's purchase history.
+    // Used to delete purchases when deleting a customer's purchase history.
     @Override
     public void deleteCouponPurchaseByCustomer(int customerId) throws SQLException {
         Connection con = pool.getConnection();

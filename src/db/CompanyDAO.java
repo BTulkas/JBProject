@@ -8,7 +8,7 @@ import db.exceptions.CompanyNotFoundException;
 
 public interface CompanyDAO {
 	
-	int isCompanyExists(String email, String password) throws SQLException;
+	int isCompanyExists(String email) throws SQLException;
 	void addCompany(Company company) throws SQLException;
 	void updateCompany(Company company) throws SQLException;
 	void deleteCompany(int companyId) throws SQLException;
