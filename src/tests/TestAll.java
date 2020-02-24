@@ -22,6 +22,7 @@ import login_manager.LoginManager;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Calendar;
 
 public class TestAll {
     public static void main(String[] args) throws CustomerExistsException, CouponExists{
@@ -87,11 +88,19 @@ public class TestAll {
 
 
             CompanyFacade loggedAsComp = (CompanyFacade) loginManager.login("some@one.com", "123456", ClientType.Company);
+            Calendar calStart = Calendar.getInstance();
+            Calendar calEnd = Calendar.getInstance();
+            calStart.set(2019, Calendar.SEPTEMBER, 20);
+            calEnd.set(2020, Calendar.DECEMBER, 20);
+			
             
-/*			loggedAsComp.addCoupon(new Coupon(1, CategoryType.Electronics,
-			"Electric 4", "Discount on electro-stuff", Date.valueOf("2019-09-20"),
-			Date.valueOf("2020-12-20"), 1, 10.5, "A Image"));*/
-
+			/*
+			 * loggedAsComp.addCoupon(new Coupon(1, CategoryType.Electronics, "Electric 4",
+			 * "Discount on electro-stuff", new Date(calStart.getTimeInMillis()), new
+			 * Date(calEnd.getTimeInMillis()), 1, 10.5, "A Image"));
+			 */
+            
+            
 /*            CouponDBDAO coupDB = new CouponDBDAO();
             Coupon coup = coupDB.getOneCoupon(6);
             

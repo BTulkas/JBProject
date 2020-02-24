@@ -4,7 +4,7 @@ import beans.Coupon;
 import db.CouponDBDAO;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class CouponExpirationDailyJob extends Thread {
@@ -25,9 +25,10 @@ public class CouponExpirationDailyJob extends Thread {
         do{
 
             try {
+            	Calendar cal = Calendar.getInstance(); 
 
                 for(Coupon coupon:coupDB.getAllCoupons()){
-                    if(coupon.getEndDate().before(new Date())){
+                    if(coupon.getEndDate().before(new Date(cal.getTimeInMillis()))){
                         coupDB.deleteCouponPurchase(coupon.getCouponId());
                         coupDB.deleteCoupon(coupon.getCouponId());
                     }

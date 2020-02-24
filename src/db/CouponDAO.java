@@ -2,7 +2,6 @@ package db;
 
 import beans.Coupon;
 import db.exceptions.CouponNotFoundException;
-import db.exceptions.CustomerNotFoundException;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

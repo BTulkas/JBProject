@@ -3,7 +3,6 @@ package db;
 import beans.CategoryType;
 import beans.Coupon;
 import db.exceptions.CouponNotFoundException;
-import db.exceptions.CustomerNotFoundException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
