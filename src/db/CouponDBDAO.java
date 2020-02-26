@@ -166,7 +166,7 @@ public class CouponDBDAO implements CouponDAO {
                 return new Coupon(
                         couponId,
                         rs.getInt("company_id"),
-                        CategoryType.values()[rs.getInt("category_id")],
+                        CategoryType.values()[rs.getInt("category_id")-1],
                         rs.getString("title"),
                         rs.getString("description"),
                         rs.getDate("start_date"),

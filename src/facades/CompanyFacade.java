@@ -48,7 +48,7 @@ public class CompanyFacade extends ClientFacade {
 
         // Iterates over all coupons by the company to throw exception if tying to add a coupon with existing name
 	    for(Coupon coup:coupDB.getCompanyCoupons(loggedCompanyId)){
-           if(coup.getTitle().equals((coupon.getTitle()))){
+           if(coup.getTitle().equals(coupon.getTitle())){
                throw new CouponExists();
            }
        }
@@ -57,21 +57,30 @@ public class CompanyFacade extends ClientFacade {
 
 
     // Updates coupon to match Coupon object given.
-    public void updateCoupon(Coupon coupon) throws SQLException {
+    public void updateCoupon(Coupon coupon) throws SQLException, CouponNotFoundException {
 
-        coupDB.updateCoupon(coupon);
+    	// Checks that the coupon requested belongs to the logged company.
+    	if(coupon.getCompanyId() == loggedCompanyId) coupDB.updateCoupon(coupon);
+    	else throw new CouponNotFoundException();
+    	
 
     }
 
     
     // Does what it says on the tin.
-    public void deleteCoupon(int couponId) throws SQLException {
+    public void deleteCoupon(int couponId) throws SQLException, CouponNotFoundException {
 
-    	// Deletes record of all purchases of the coupon for some reason.
-        coupDB.deleteCouponPurchase(couponId);
-    	
-    	coupDB.deleteCoupon(couponId);
+    	// Checks that the coupon requested belongs to the logged company.
+    	if(getOneCoupon(couponId).getCompanyId() == loggedCompanyId) {
+	    	// Deletes record of all purchases of the coupon for some reason.
+	        coupDB.deleteCouponPurchase(couponId);
+	    	
+	    	coupDB.deleteCoupon(couponId);
+    	}
+    	else throw new CouponNotFoundException();
     }
+    	
+
 
 
 // Coupon getter methods

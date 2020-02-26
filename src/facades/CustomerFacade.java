@@ -4,10 +4,12 @@ import beans.CategoryType;
 import beans.Coupon;
 import beans.Customer;
 import db.exceptions.CustomerNotFoundException;
+import facades.exceptions.CouponExists;
 import facades.exceptions.IncorrectPasswordException;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class CustomerFacade extends ClientFacade {
@@ -38,11 +40,16 @@ public class CustomerFacade extends ClientFacade {
 // Coupon getter methods
 
 	// Does what is says on the tin.
-	public void purchaseCoupon(Coupon coupon) throws SQLException {
-
-        // Checks if coupon is in stock and not expired.
-		if(coupon.getAmount()!=0 && coupon.getEndDate().after(new Date())) {
-			// Logs the coupon purchse.
+	public void purchaseCoupon(Coupon coupon) throws SQLException, CouponExists {
+        
+		// Checks if customer already purchased the same coupon.
+		for(Coupon c : getCustomerPurchaseHistory()) {
+			if(c.getCouponId() == coupon.getCouponId()) throw new CouponExists();
+		}
+		
+		// Checks if coupon is in stock and not expired.
+		if(coupon.getAmount()>0 && coupon.getEndDate().after(new Date(Calendar.getInstance().getTimeInMillis()))) {
+			// Logs the coupon purchase.
 			coupDB.addCouponPurchase(loggedCustomerId, coupon.getCouponId());
 			// Decreases amount of coupon in stock by 1.
 			coupon.setAmount(coupon.getAmount()-1);
