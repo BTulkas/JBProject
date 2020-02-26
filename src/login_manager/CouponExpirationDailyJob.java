@@ -25,6 +25,7 @@ public class CouponExpirationDailyJob extends Thread {
         do{
 
             try {
+            	// Gets a correct date to pass to Date, because sql Date is the IE of Dates.
             	Calendar cal = Calendar.getInstance(); 
 
                 for(Coupon coupon:coupDB.getAllCoupons()){
