@@ -102,11 +102,9 @@ public class TestAll {
             
             
 /*            CouponDBDAO coupDB = new CouponDBDAO();
-            Coupon coup = coupDB.getOneCoupon(6);
-            
-            coup.setPrice(9);
+            Coupon coup = coupDB.getOneCoupon(7);
 
-            coup.setCategory(CategoryType.valueOf("Spa"));
+            coup.setTitle("Electric 4");
 
             loggedAsComp.updateCoupon(coup);*/
 

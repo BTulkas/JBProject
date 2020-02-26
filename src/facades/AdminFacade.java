@@ -12,6 +12,7 @@ import db.exceptions.CompanyNotFoundException;
 import db.exceptions.CustomerNotFoundException;
 import facades.exceptions.CompanyExistsException;
 import facades.exceptions.CustomerExistsException;
+import facades.exceptions.EmailExistsException;
 
 public class AdminFacade  extends ClientFacade{
 	
@@ -60,9 +61,14 @@ public class AdminFacade  extends ClientFacade{
 
 
 	// Updates company to match Company object given.
-	public void updateCompany(Company company) throws CompanyNotFoundException, SQLException {
+	public void updateCompany(Company company) throws CompanyNotFoundException, SQLException, EmailExistsException {
 
-		compDB.updateCompany(company);
+		// Checks for duplicate email before update.
+	    for(Company comp : compDB.getAllCompanies()){
+		    if(comp.getEmail().equals(company.getEmail())) throw new EmailExistsException();
+        }
+
+	    compDB.updateCompany(company);
 
 	}
 
@@ -118,9 +124,15 @@ public class AdminFacade  extends ClientFacade{
 
 
 	// Updates customer to match Customer object given.
-	public void updateCustomer(Customer customer) throws SQLException {
+	public void updateCustomer(Customer customer) throws SQLException, EmailExistsException {
 
-		cusDB.updateCustomer(customer);
+        // Checks for duplicate email before update.
+	    for(Customer cust : cusDB.getAllCustomers()) {
+            if (cust.getEmail().contentEquals(customer.getEmail())) {
+                throw new EmailExistsException();
+            }
+        }
+	    cusDB.updateCustomer(customer);
 
 	}
 
@@ -131,6 +143,5 @@ public class AdminFacade  extends ClientFacade{
 		coupDB.deleteCouponPurchaseByCustomer(customerId);
 
 		cusDB.deleteCustomer(customerId);
-	}
-
+    }
 }

@@ -57,9 +57,15 @@ public class CompanyFacade extends ClientFacade {
 
 
     // Updates coupon to match Coupon object given.
-    public void updateCoupon(Coupon coupon) throws SQLException, CouponNotFoundException {
+    public void updateCoupon(Coupon coupon) throws SQLException, CouponNotFoundException, CouponExists {
 
-    	// Checks that the coupon requested belongs to the logged company.
+        // Checks for duplicate title before update.
+        for(Coupon coup:coupDB.getCompanyCoupons(loggedCompanyId)){
+            if(coup.getTitle().equals(coupon.getTitle())){
+                throw new CouponExists();
+            }
+        }
+        // Checks that the coupon requested belongs to the logged company.
     	if(coupon.getCompanyId() == loggedCompanyId) coupDB.updateCoupon(coupon);
     	else throw new CouponNotFoundException();
     	
